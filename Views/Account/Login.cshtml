@@ -1,0 +1,217 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<style>
+    .glass-card {
+        background: rgba(14, 25, 38, 0.8) !important;
+        border: 2px solid #00d2ff !important;
+        box-shadow: 0 0 5px rgba(0, 210, 255, 1), /* Lõi sáng sắc nét sát viền */
+                    0 0 15px rgba(0, 210, 255, 0.7), 
+                    0 0 40px rgba(0, 210, 255, 0.4), 
+                    inset 0 0 10px rgba(0, 210, 255, 0.3) !important; /* Ánh sáng hắt vào trong hộp */
+        backdrop-filter: blur(10px) !important;
+    }
+
+    /* Container bao bọc toàn bộ form và nút chuyển đổi */
+    .login-wrapper{
+        width: 100%;
+        max-width: 400px;
+        text-align:center;
+        height: 300px;
+    }
+
+    /*option chọn role*/
+    /*Container chứa radio role*/
+    .role-toggle-container{
+        display:inline-flex;
+        background: rgba(14, 25, 38, 0.6);
+        border: 1px solid rgba(0, 210, 255, 0.2);
+        border-radius: 50px;
+        padding:5px;
+        position: relative;
+        width:250px;
+    }
+    .role-btn{
+        flex:1;
+        z-index: 2; /*ƯU tiên nút chọn lên trên*/
+        padding: 8px 0;
+        color: #8fa0b5;
+        transition: color 0.3s ease; /*animation đổi màu chữ*/
+        cursor: pointer; /*ngón tay khi chọn*/
+        border-radius: 50px;
+    }
+    .btn-check:checked + .role-btn { /*đổi màu role được check*/
+        color: #0b2545;
+    }
+    .role-slider{
+        position: absolute;
+        top:4px;
+        left:4px;
+        width: calc(50% - 2px); /*50% WIDTH phần tử relative(.role-toggle-container) -2px*/
+        height: calc(100% - 8px);
+        background: #00d2ff;
+        border-radius: 50px;
+        z-index: 1;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); /*animation đổi màu role được check*/
+    }
+
+
+
+
+
+
+    /* Phần chữ tiêu đề LOG IN nằm trên cùng */
+    .card-header-neon {
+        background: rgba(0, 210, 255, 0.1);
+        border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+        padding: 20px ;
+    }
+
+        .card-header-neon h2 {
+            color: white;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+
+    /* --- Ô NHẬP LIỆU (INPUT FIELDS) --- */
+    .text-neon-dim {
+        color: #8fa0b5;
+        font-size: 0.9rem;
+    }
+
+    .cyber-input {
+        background-color: rgba(7, 13, 22, 0.6) !important;
+        border: 1px solid rgba(0, 210, 255, 0.3) !important;
+        color: #ffffff !important;
+        border-radius: 10px !important; /* Bo góc nhẹ hơn khung lớn giống mẫu */
+        padding: 12px 16px;
+        transition: all 0.3s ease !important;
+    }
+
+        .cyber-input::placeholder {
+            color: #4a5d73;
+        }
+        /* Hiệu ứng sáng viền khi bấm chuột vào ô nhập dữ liệu */
+        .cyber-input:focus {
+            border-color: #00d2ff !important;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4) !important;
+            background-color: rgba(7, 13, 22, 0.9) !important;
+        }
+
+    /* Link quên mật khẩu */
+    .forgot-link {
+        color: #00d2ff;
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: text-shadow 0.2s;
+    }
+
+        .forgot-link:hover {
+            text-shadow: 0 0 8px #00d2ff;
+        }
+
+    /* --- NÚT BẤM LOG IN CHÍNH --- */
+    .btn-cyber-submit {
+        background: #00d2ff !important;
+        color: #03080f !important;
+        border: none !important;
+        font-weight: 700;
+        border-radius: 12px !important;
+        padding: 12px;
+        text-transform: capitalize;
+        box-shadow: 0 0 15px rgba(0, 210, 255, 0.4) !important;
+        transition: all 0.3s ease !important;
+    }
+
+
+</style>
+
+
+<div class="login-wrapper">
+    <div class="role-toggle-container mb-4 fw-bold">
+        <input type="radio" name="role" id="roleStudent" checked class="btn-check"/>
+        <label for="roleStudent" class="role-btn">Student</label>
+
+        <input type="radio" name="role" id="roleTeacher" class="btn-check" />
+        <label for="roleTeacher" class="role-btn">Teacher</label>
+
+        <div class="role-slider"></div>
+    </div>
+
+    <div class="cyber-card">
+        <div class="card-header-neon">
+            <h2>LOG IN</h2>
+        </div>
+
+        <div class="card-body-content p-4">
+            <form>
+                <!-- Ô nhập Email -->
+                <div class="mb-4 text-start">
+                    <label class="form-label text-neon-dim">Student ID / Email Address</label>
+                    <input type="email" class="form-control cyber-input" placeholder="daigianhi123@gmail.com">
+                </div>
+
+                <!-- Ô nhập Password -->
+                <div class="mb-3 text-start">
+                    <label class="form-label text-neon-dim">Password</label>
+                    <div class="position-relative">
+                        <input type="password" id="passwordInput" class="form-control cyber-input" placeholder="Enter password">
+                        <!-- Thêm id="togglePassword" cho con mắt -->
+                        <i class="fa-regular fa-eye position-absolute end-0 top-50 translate-middle-y me-3 text-neon-dim"
+                           id="togglePassword"
+                           style="cursor: pointer;"></i>
+                    </div>
+                </div>
+
+                <!-- Quên mật khẩu -->
+                <div class="mb-4 text-start">
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <!-- Nút bấm Đăng nhập -->
+                <button type="submit" class="btn btn-cyber-submit w-100 py-2.5">Log in</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        const studentRadio = document.getElementById('roleStudent');
+        const teacherRadio = document.getElementById('roleTeacher');
+        const slider = document.querySelector('.role-slider');
+
+        studentRadio.addEventListener('change', () => {
+            if(studentRadio.checked) slider.style.left = '4px';
+        });
+
+        teacherRadio.addEventListener('change', () => {
+            if(teacherRadio.checked) slider.style.left = 'calc(50% - 2px)';
+        });
+
+
+
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', () => {
+            // 1. Kiểm tra xem mật khẩu đang ẩn hay hiện
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+
+            // 2. Chuyển đổi qua lại giữa 'text' (hiện) và 'password' (ẩn)
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+
+            // 3. Đổi icon từ mắt mở sang mắt gạch chéo (fa-eye-slash) và ngược lại
+            if (isPassword) {
+                togglePassword.classList.remove('fa-eye');
+                togglePassword.classList.add('fa-eye-slash');
+            } else {
+                togglePassword.classList.remove('fa-eye-slash');
+                togglePassword.classList.add('fa-eye');
+            }
+        });
+    </script>
+}

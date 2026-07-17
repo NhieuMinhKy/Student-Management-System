@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Student Management System</title>
+    <script type="importmap"></script>
+    <!-- Nhúng Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Nhúng FontAwesome để lấy icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ASP.NET_CORE_Tutorial.styles.css" asp-append-version="true" />
+
+    <style>
+        body{
+        margin: 0;
+        background: radial-gradient(at top left,#053031, #050f2b);
+        }
+        .logo_saitama{
+        width: 80%;
+        max-width: 500px;
+        height: auto;
+        border: 2px solid #fff; /* Tạo viền trắng */
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .schoolname{
+            color: white;
+            text-shadow: 0 0 5px #fff,
+                         0 0 10px #fff,
+                         0 0 20px rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body data-bs-theme="dark">
+    <!-- min-vh-100 đảm bảo khung chứa luôn cao bằng 100% màn hình -->
+    <div class="container-fluid min-vh-100" style="padding-top:150px;">
+        <div class="row w-100 ">
+            <div class="col-12 col-lg-6 py-5 d-flex flex-column  justify-content-center align-items-center ">
+                <img src="~/img/669047.png" class="logo_saitama rounded-5" alt="Alternate Text" >
+                <div class="schoolname mt-4 fw-bold">
+                    <h1 >
+                        DAIGIANHI SCHOOL
+                    </h1>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center py-5   ">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Nhúng Bootstrap 5 CSS Js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

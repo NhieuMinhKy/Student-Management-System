@@ -10,7 +10,7 @@
     <!-- Nhúng FontAwesome để lấy icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ASP.NET_CORE_Tutorial.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/StudentManagementSystem.styles.css" asp-append-version="true" />
 
     <style>
         body{
@@ -33,7 +33,7 @@
             text-align: center;
         }
     </style>
-
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body data-bs-theme="dark">
     <!-- min-vh-100 đảm bảo khung chứa luôn cao bằng 100% màn hình -->
@@ -47,7 +47,7 @@
                     </h1>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center py-5   ">
+            <div class="col-sm-12 col-lg-6 d-flex justify-content-center pt-0">
                 @RenderBody()
             </div>
         </div>

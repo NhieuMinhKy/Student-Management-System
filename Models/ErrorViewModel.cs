@@ -1,4 +1,4 @@
-namespace ASP.NET_CORE_Tutorial.Models
+namespace StudentManagementSystem.Models
 {
     public class ErrorViewModel
     {

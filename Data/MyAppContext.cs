@@ -10,6 +10,8 @@ namespace StudentManagementSystem.Data
         {
 
         }
-        public DbSet<Student> Students { get; set; } //DbSet<Item> đại diện cho bảng Items trong cơ sở dữ liệu, nơi bạn có thể thực hiện các thao tác CRUD (Create, Read, Update, Delete) trên các đối tượng Item.
-    }
+        public DbSet<Student> Students { get; set; } //DbSet<Student> đại diện cho bảng Students trong cơ sở dữ liệu, nơi ta có thể thực hiện các thao tác CRUD (Create, Read, Update, Delete) trên các đối tượng Student.
+
+        public DbSet<Teacher> Teachers { get; set; }
+     }
 }

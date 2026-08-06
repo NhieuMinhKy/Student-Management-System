@@ -26,7 +26,7 @@ namespace StudentManagementSystem.Controllers
         }
 
         [HttpPost] //để xử lý dữ liệu từ form gửi lên và lưu vào cơ sở dữ liệu
-        public async Task<IActionResult> Create([Bind("Id,StudentCode,Name")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,StudentCode,Name,StudentStatus")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace StudentManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentCode,Name")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentCode,Name","StudentStatus")] Student student)
         {
             if (ModelState.IsValid)
             {

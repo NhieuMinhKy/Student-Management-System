@@ -13,6 +13,7 @@ namespace StudentManagementSystem.Models
         [Display(Name = "Mã sinh viên")]
         public string StudentCode { get; set; }
 
+        [Display(Name = "Trạng thái sinh viên")]
         public String StudentStatus { get; set; } = "Active"; // Active, Inactive
     }
 }

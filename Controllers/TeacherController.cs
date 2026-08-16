@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using StudentManagementSystem.Data;
@@ -11,19 +11,19 @@ namespace StudentManagementSystem.Controllers
 {
     public class TeacherController : Controller
     {
-        private readonly MyAppContext _context;
+        private readonly MyAppContext _context; //biến đại diện cho Dbcontext của Entity Framework Core, giúp controller link với Database (chỉ được gán giá trị 1 lần duy nhất và chỉ dùng bên trong class TeacherCtroller.cs)
         public TeacherController(MyAppContext context)
         {
             _context = context;
         }
 
         //READ
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() //naming fucntion trùng với file Index.cshtml trong view để thư viện tự link giữa controller với view (Convention over Configuration (Ưu tiên quy ước hơn cấu hình) của Framework using Microsoft.EntityFrameworkCore;)
         {
             return View(await _context.Teachers.ToListAsync());
         }
 
-        //CREATE
+        /*CREATE
         [HttpGet]
         public IActionResult Create() //hiển thị form tạo teacher
         {
@@ -31,6 +31,7 @@ namespace StudentManagementSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name","Id","TeacherCode")] Teacher teacher)
         {
             if (ModelState.IsValid)
@@ -43,17 +44,50 @@ namespace StudentManagementSystem.Controllers
         }
 
         //EDIT
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var teacher = await _context.Teachers.FirstOrDefaultAsync(x => x.Id == id);
             return View(teacher);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id","Name","TeacherCode","TeacherStatus")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
                 _context.Teachers.Update(teacher);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Teacher");
+            }
+            return View(teacher);
+        }*/
+
+        //Create+Edit
+        [HttpGet]
+        public async Task<IActionResult> CreateOrEdit(int id =0)
+        {
+            if (id == 0) 
+            {
+                return View(new Teacher());
+            }
+
+            var teacher = await _context.Teachers.FindAsync(id);
+            return View(teacher);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateOrEdit([Bind("TeacherId", "FullName", "TeacherCode", "Status", "DepartmentId")] Teacher teacher)
+        {
+            if (ModelState.IsValid)
+            {
+                if (teacher.TeacherId == 0)
+                {
+                    _context.Teachers.Add(teacher);
+                }
+                else
+                {
+                    _context.Teachers.Update(teacher);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Teacher");
             }
@@ -68,6 +102,7 @@ namespace StudentManagementSystem.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirm(int id)
         {
             var teacher = await _context.Teachers.FindAsync(id);

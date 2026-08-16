@@ -19,7 +19,7 @@ namespace StudentManagementSystem.Controllers
         }
 
         //CREATE
-        [HttpGet] //để hiển thị form tạo mới sinh viên
+        /*[HttpGet] //để hiển thị form tạo mới sinh viên
         public IActionResult Create()
         {
             return View();
@@ -39,6 +39,7 @@ namespace StudentManagementSystem.Controllers
 
 
         //EDIT
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var student = await _context.Students.FirstOrDefaultAsync(x=>x.Id == id);
@@ -55,13 +56,43 @@ namespace StudentManagementSystem.Controllers
                 return RedirectToAction("Index", "Student");
             }
             return View(student);
+        }*/
+
+
+        //CreateOrEdit
+        [HttpGet]
+        public async Task<IActionResult> CreateOrEdit(int id = 0) {
+            if (id == 0)
+            {
+                return View(new Student());
+            }
+            return View(await _context.Students.FindAsync(id));
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateOrEdit(int id, Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == 0)
+                {
+                    _context.Students.Add(student);
+                }
+                else
+                {
+                    _context.Students.Update(student);
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Student");
+            }
+            return View(student);
+        }
+
 
         //DELETE
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _context.Students.FirstOrDefaultAsync(x => x.Id == id);
+            var item = await _context.Students.FirstOrDefaultAsync(x => x.StudentId == id);
             return View(item);
         }
 

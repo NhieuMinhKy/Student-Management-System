@@ -4,18 +4,35 @@ namespace StudentManagementSystem.Models
     public class Teacher
     {
         [Key]
-        public int Id { get; set; }
+        public int TeacherId { get; set; }
 
-        [Required (ErrorMessage = "Vui lòng nhập tên giáo viên")]
-        [Display(Name = "Tên giáo viên")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập TeacherCode")]
+        [Display(Name = "TeacherCode")]
+        [MaxLength(20)]
+        public string TeacherCode { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Vui lòng nhập mã giáo viên")]
-        [Display (Name = "Mã giáo viên")]
-        public string TeacherCode { get; set; }
+        [Required (ErrorMessage = "Vui lòng nhập FullName")]
+        [Display(Name = "FullName")]
+        [MaxLength(100)]
+        public string FullName { get; set; } = string.Empty;
 
-        [Display(Name = "Trạng thái giáo viên")]
-        public string TeacherStatus { get; set; } = "Active";
+        [Display(Name = "Phone number")]
+        [Phone(ErrorMessage = "Phone number không hợp lệ")]
+        [MaxLength(20)]
+        public string? Phone { get; set; }
+
+        [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
+        [MaxLength(100)]
+        public string? Email { get; set; }
+
+        [Display(Name ="DepartmentId")]
+        [Required(ErrorMessage = "Vui lòng chọn DepartmentId")]
+        public int DepartmentId { get; set; }
+
+        [Display(Name = "Teacher Status")]
+        [MaxLength(20)]
+        public string Status { get; set; } = "Active";
     }
 }
      

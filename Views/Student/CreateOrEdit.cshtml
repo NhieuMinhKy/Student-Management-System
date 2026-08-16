@@ -1,0 +1,124 @@
+﻿@model StudentManagementSystem.Models.Student
+@{
+    ViewData["Title"] = (Model.StudentId == 0 ? "Create Student" : "Edit Student");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    input.bg-dark::placeholder {
+        color: #0dcaf0 !important;
+        opacity: 0.7;
+    }
+</style>
+
+<div class="container  my-5 text-light">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-light border-secondary shadow-lg">
+                <div class="card-header border-secondary text-center">
+                    <h4 class="mb-0 text-success fw-bold"> Fill in Student Information</h4>
+                </div>
+
+             <div class="card-body bg-dark p-4">
+                    <!-- Form -->
+                    <form asp-action="CreateOrEdit" method="post">
+
+                        <!-- Hiển thị tóm tắt lỗi chung nếu có -->
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <input type="hidden" asp-for="StudentId" />
+
+                        <!-- StudentCode-->
+                        <div class=" row mb-3">
+                            <div class="col">
+                                <label asp-for="StudentCode" class="form-label text-bold"></label> <span class="text-danger">*</span>
+                                <input asp-for="StudentCode" class="form-control bg-dark text-light border-secondary" placeholder="ST0001..." />
+                                <span asp-validation-for="StudentCode" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row mb-3">
+                            <!--LastName-->
+                            <div class="col-md-6">
+                                <label asp-for="LastName" class="form-label text-bold"></label> <span class="text-danger">*</span>
+                                <input asp-for="LastName" class="form-control bg-dark text-light border-secondary" placeholder="Enter LastName" />
+                                <span asp-validation-for="LastName" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                            <!--FirstName-->
+                            <div class="col-md-6 ">
+                                <label asp-for="FirstName" class="form-label text-bold"></label> <span class="text-danger">*</span>
+                                <input asp-for="FirstName" class="form-control bg-dark text-light border-secondary" placeholder="Enter FirstName" />
+                                <span asp-validation-for="FirstName" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                        </div>
+                        
+                        
+
+                        
+
+                        <div class="row mb-3">
+                        <!--Date of Birth-->
+                            <div class="col-md-6">
+                                <label asp-for="DateOfBirth" class="form-label text-bold"></label> <span class="text-danger">*</span>
+                                <input asp-for="DateOfBirth"  type="date" class="form-control bg-dark text-light border-secondary" />
+                                <span asp-validation-for="DateOfBirth" class="text-danger small mt-1 d-block"></span>
+                            </div>
+
+                        <!-- Gender -->
+                            <div class="col-md-6">
+                                <label asp-for="Gender" class="form-label text-bold"></label>
+                                <select asp-for="Gender" class="form-control bg-dark text-light border-secondary">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <!--Phone number-->
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="Phone" class="form-label text-bold"></label>
+                                <input asp-for="Phone" type="tel" class="form-control bg-dark text-light border-secondary" placeholder="Enter Phone number" />
+                                <span asp-validation-for="Phone" class="text-danger small mt-1 d-block"></span>
+                            </div>
+
+                            <!--Email-->
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label text-bold"></label>
+                                <input asp-for="Email" type="email" class="form-control bg-dark text-light border-secondary" placeholder="Enter Email" />
+                                <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        
+
+                        <!--Address-->
+                        <div class="mb">
+                            <label asp-for="Address" class="form-label text-bold"></label>
+                            <input asp-for="Address" class="form-control bg-dark text-light border-secondary" placeholder="Enter Address" />
+                            <span asp-validation-for="Address" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+
+
+                        <!-- StudentStatus -->
+                        <div class="mb-4">
+                            <label asp-for="Status" class="form-label text-bold"></label>
+                            <select asp-for="Status" class="form-control bg-dark text-light border-secondary">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <!-- Buttons-->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-primary">Cancel & Back</a>
+                            <button type="submit" class="btn btn-success px-4">SAVE</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

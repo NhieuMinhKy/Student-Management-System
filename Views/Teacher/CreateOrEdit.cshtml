@@ -1,0 +1,96 @@
+﻿@model StudentManagementSystem.Models.Teacher
+@{
+    ViewData["Title"] = (Model.TeacherId == 0 ? "Create Teacher" :"Edit Teacher");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    input.bg-dark::placeholder {
+        color: #0dcaf0 !important;
+        opacity: 0.7;
+    }
+</style>
+
+<div class="container  my-5 text-light">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-light border-secondary shadow-lg">
+                <div class="card-header border-secondary text-center">
+                    <h4 class="mb-0 text-success fw-bold"> Fill in Teacher Information</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Form -->
+                    <form asp-action="CreateOrEdit" method="post">
+
+                        <!-- Hiển thị tóm tắt lỗi chung nếu có -->
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <input type="hidden" asp-for="TeacherId" />
+
+                        <!-- TeacherCode-->
+                        <div class="mb-3">
+                            <label asp-for="TeacherCode" class="form-label fw-bold">Teacher Code</label> <span class="text-danger">*</span>
+                            <input asp-for="TeacherCode" class="form-control bg-dark text-light border-secondary" placeholder="TC0001..." />
+                            <span asp-validation-for="TeacherCode" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <!--FullName-->
+                        <div class="mb-4">
+                            <label asp-for="FullName" class="form-label fw-bold">Full Name</label> <span class="text-danger">*</span>
+                            <input asp-for="FullName" class="form-control bg-dark text-light border-secondary" placeholder="Enter Teacher Name" />
+                            <span asp-validation-for="FullName" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        
+                        <!--Phone number-->
+                        <div class="col mb-4">
+                            <label asp-for="Phone" class="form-label fw-bold"></label>
+                            <input asp-for="Phone" type="tel" class="form-control bg-dark text-light border-secondary" placeholder="Enter Phone number" />
+                            <span asp-validation-for="Phone" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <!--Email-->
+                        <div class="col">
+                            <label asp-for="Email" class="form-label fw-bold"></label>
+                            <input asp-for="Email" type="email" class="form-control bg-dark text-light border-secondary" placeholder="Enter Email" />
+                            <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        
+                        <!--DepartmentId-->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label asp-for="DepartmentId" class="form-label fw-bold"></label> <span class="text-danger">*</span>
+                                <input asp-for="DepartmentId" class="form-control  bg-dark text-light border-secondary" />
+                                <span asp-validation-for="DepartmentId" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+
+                        <!-- TeacherStatus -->
+                        <div class="mb-4">
+                            <label asp-for="Status" class="form-label fw-bold">Status</label>
+                            <select asp-for="Status" class="form-control bg-dark text-light border-secondary">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger small mt-1 d-block"></span>
+                        </div>
+
+                        <!-- Buttons-->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-primary">Cancel & Back</a>
+                            <button type="submit" class="btn btn-success px-4">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Đoạn Script này giúp kích hoạt tính năng báo chữ đỏ BẮT BUỘC NHẬP ngay trên trình duyệt mà không cần tải lại trang -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

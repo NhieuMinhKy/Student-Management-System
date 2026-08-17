@@ -50,3 +50,10 @@ namespace StudentManagementSystem.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }
+
+
+//Bai Thanh Ca Buon aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//Bai Thanh Ca Buon aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//Bai Thanh Ca Buon aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//Bai Thanh Ca Buon aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//Bai Thanh Ca Buon aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

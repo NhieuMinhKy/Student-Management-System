@@ -8,7 +8,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <h1 class="me-3 fw-bold text-info">  Student List</h1>
         <!--create a button to add new student-->
-        <a asp-action="Create" asp-controller="Student" class="btn btn-success shadow fw-bold">  + Add Student</a>
+        <a asp-action="CreateOrEdit" asp-controller="Student" class="btn btn-success shadow fw-bold">  + Add Student</a>
     </div>
 
     <div class="card  text-light border-secondary shadow-sm my-5">
@@ -18,7 +18,9 @@
                     <tr class="table-active text-center">
                         <th>ID</th>
                         <th>Student Code</th>
-                        <th>Full Name</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Gender</th>
                         <th>Status</th>
                         <th>Config</th> 
                     </tr>
@@ -31,13 +33,15 @@
                         foreach(var student in Model)
                         {
                             <tr>
-                                <td class="align-middle text-center">@student.Id</td>
+                                <td class="align-middle text-center">@student.StudentId</td>
                                 <td class="align-middle">@student.StudentCode</td>
-                                <td class="align-middle">@student.Name</td>
-                                <td class="align-baseline">@student.StudentStatus</td>
+                                <td class="align-middle">@student.LastName</td>
+                                <td class="align-middle">@student.FirstName</td>
+                                <td class="align-middle">@student.Gender</td>
+                                <td class="align-baseline">@student.Status</td>
                                 <td class="align-middle text-center">
-                                    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-outline-info me-1">Edit</a>
-                                    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    <a asp-action="CreateOrEdit" asp-route-id="@student.StudentId" class="btn btn-sm btn-outline-info me-1">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@student.StudentId" class="btn btn-sm btn-outline-danger">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -45,7 +49,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">
+                            <td colspan="7" class="text-center text-muted py-4">
                                 <em>No data available. Click "Add Student" to get started!</em>
                             </td>
                         </tr>
